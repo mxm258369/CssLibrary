@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>调色板</title>
+    <style>
+        li {
+            list-style: none;
+            margin: 25px 25px;
+        }
+        
+        .boxs {
+            width: 400px;
+            height: 300px;
+            margin: 100px auto 0;
+            background: chocolate;
+            overflow: hidden;
+        }
+        
+        ul {
+            height: 200px;
+            margin-top: 50px;
+        }
+        
+        button {
+            border-radius: 5px;
+        }
+        
+        span {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="boxs" class="boxs">
+        <ul>
+            <li>
+                <span>R</span>
+                <button>-</button>
+                <input type="text" value="111">
+                <button>+</button>
+            </li>
+            <li>
+                <span>g</span>
+                <button>-</button>
+                <input type="text" value="111">
+                <button>+</button>
+            </li>
+            <li>
+                <span>b</span>
+                <button>-</button>
+                <input type="text" value="111">
+                <button>+</button>
+            </li>
+            <button id="go">go</button>
+        </ul>
+    </div>
+    <script>
+        var oButtons = document.getElementsByTagName('button');
+        for (var i = 0; i < oButtons.length; i++) {
+            (function(i) {
+                oButtons[i].onclick = function() {
+                    var num = parseInt(this.parentNode.getElementsByTagName('input')[0].value);
+                    if (this.innerHTML == '+') {
+                        if (num <= 255) {
+                            num++;
+                        }
+                    } else {
+                        num--;
+                    }
+                    this.parentNode.getElementsByTagName('input')[0].value = num;
+                }
+            })(i)
+        }
+        var oGo = document.getElementById('go');
+        var oDiv = document.getElementById('boxs')
+        oGo.onclick = function() {
+            var r = parseInt(document.getElementsByTagName('input')[0].value);
+            var g = parseInt(document.getElementsByTagName('input')[1].value);
+            var b = parseInt(document.getElementsByTagName('input')[2].value);
+            oDiv.style.background = "rgb(" + r + "," + g + "," + b + ")";
+
+        }
+    </script>
+</body>
+
+</html>
